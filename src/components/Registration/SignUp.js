@@ -1,0 +1,149 @@
+import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
+import { HomeButton } from '../Buttons/HomeButton';
+import { Container, Card, Row, Input, Button, Spacer, Text, Divider } from '@nextui-org/react';
+import axios from "axios";
+
+const SignUp = () => {
+
+  const [ state, setState ] = useState(
+    { 
+      email: "",
+      password: "",
+      age: null,
+      gender:  "",
+      department_id: null,
+      birthday: "",
+    }
+  );
+
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    setState({...state,
+      [event.target.name]: event.target.value});
+  }
+
+  const signIn = async (values) => {   
+    console.log('values', values)
+
+    try {
+      const send = await axios.post('http://localhost:4141/api/signin', {
+        email: values.email,
+        password: values.password,
+        age: values.age,
+        gender: values.gender,
+        department_id: values.department_id,
+        birthday: values.birthday,
+      })
+      localStorage.setItem('MyTemporaryToken', send.data.bearer);
+      navigate('/user');
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  const onFinish = (e) => {
+    e.preventDefault();
+    console.log('form values', state)
+    signIn(state);
+  };
+
+  return (
+    <Container
+    css={{
+      display: 'flex',
+      flexDirection: 'column',
+      justify: 'center',
+      alignItems: 'center'
+    }}>
+        <Card
+        css={{ mw: "600px" , marginTop: 50}}
+        >
+          <Card.Header>
+            <Text h3 b>Sign Up</Text>
+          </Card.Header>
+          <Divider />
+          <Card.Body>
+            <form onSubmit={onFinish}>
+              <Input
+                required
+                css={{width: '100%'}}
+                label="Email"
+                name="email"
+                onChange={handleChange} />
+              <Spacer y={1} />
+              <Input.Password
+                required
+                css={{width: '100%'}}
+                label="Password"
+                name="password"
+                onChange={handleChange} />
+              <Spacer y={1} />
+              <Row css={{ justifyContent: 'space-between'}}>
+              <Input
+                required
+                type="number"
+                css={{width: '45%'}}
+                label="Your current age"
+                name="age"
+                onChange={handleChange} />
+
+              <Input
+                required
+                type="number"
+                css={{width: '45%'}}
+                label="Department ID"
+                name="department_id"
+                onChange={handleChange} />
+              </Row>
+              <Spacer y={1} />
+
+              <Input
+                required
+                css={{width: '100%'}}
+                label="Gender"
+                name="gender"
+                onChange={handleChange} />
+              <Spacer y={1} />
+              <Input
+                required
+                type="date"
+                css={{width: '100%'}}
+                label="Your birthday"
+                name="birthday"
+                onChange={handleChange} />
+              <Spacer y={1} />
+              <Row justify="space-around">
+               <HomeButton size="md" light title="Cancel" />
+                <Button
+                  size="md"
+                  type="submit">
+                  Confirm
+                </Button> 
+              </Row>
+            </form>
+        </Card.Body>
+        <Divider />
+        <Card.Footer>
+          <Row align="center" justify='center'>
+            <Text color="#acacac">
+            Already have an account?
+            </Text>
+            <Button
+              light
+              color="primary"
+              auto
+              onClick={() => navigate('/login')}
+            >
+              Sign In
+            </Button>            
+          </Row>
+        </Card.Footer>
+      </Card>
+    </Container>
+  )
+}
+
+export default SignUp;

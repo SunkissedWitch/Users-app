@@ -57,20 +57,21 @@ const Login = () => {
           <Card.Body>
             <form onSubmit={onFinish}>
               <Input
+                required
                 css={{width: '100%'}}
                 label="Email"
                 name="email"
                 onChange={handleChange} />
               <Spacer y={1} />
               <Input.Password
+                required
                 css={{width: '100%'}}
                 label="Password"
                 name="password"
                 onChange={handleChange} />
               <Spacer y={2} />
-              <Row justify="center">
-               <HomeButton title="Cancel" />
-              <Spacer x={1} />
+              <Row justify="space-around">
+               <HomeButton size="sm" light title="Cancel" />
                 <Button
                   size="sm"
                   type="submit">

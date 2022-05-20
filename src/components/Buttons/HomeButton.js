@@ -8,10 +8,7 @@ export const HomeButton = (prop) => {
 
   return (
     <Button
-    // ghost
-    size='sm'
-    // color="gradient"
-    light
+    {...prop}
     onPress={() => navigate('/')}
     >
       {title}

@@ -7,7 +7,7 @@ export const NotFound = () => {
       <p>
         There is no existing page
       </p>
-      <HomeButton />
+      <HomeButton color="primary" size="lg" title="Return to home page" />
     </div>
   )
 }
