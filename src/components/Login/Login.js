@@ -48,7 +48,7 @@ const Login = () => {
       alignItems: 'center'
     }}>
         <Card
-        css={{ mw: "400px" , marginTop: 50}}
+        css={{ mw: "400px" , my: 50}}
         >
           <Card.Header>
             <Text h3 b>Sign In</Text>

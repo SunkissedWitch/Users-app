@@ -1,6 +1,6 @@
 import "./App.css";
 import { NextUIProvider } from "@nextui-org/react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { NotFound } from "./components/NotFound";
 import { Home } from "./components/Home";
 import Login from "./components/Login/Login";
@@ -9,7 +9,6 @@ import IsAuthorized from "./helpers/IsAuthorized";
 import ProtectedRoute from "./components/Users/ProtectedRoute"
 
 function App() {
-  // console.log('env', process.env.REACT_APP_MY_SECRET_KEY)
   return (
     <NextUIProvider>
       <div className="App">

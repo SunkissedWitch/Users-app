@@ -58,7 +58,7 @@ const SignUp = () => {
       alignItems: 'center'
     }}>
         <Card
-        css={{ mw: "600px" , marginTop: 50}}
+        css={{ mw: "600px" , my: 50}}
         >
           <Card.Header>
             <Text h3 b>Sign Up</Text>
