@@ -24,11 +24,10 @@ const SignUp = () => {
       [event.target.name]: event.target.value});
   }
 
-  const signIn = async (values) => {   
-    console.log('values', values)
-
+  const regUser = async (values) => {
+    
     try {
-      const send = await axios.post('http://localhost:4141/api/signin', {
+      const send = await axios.post('http://localhost:4141/api/signup', {
         email: values.email,
         password: values.password,
         age: values.age,
@@ -47,7 +46,7 @@ const SignUp = () => {
   const onFinish = (e) => {
     e.preventDefault();
     console.log('form values', state)
-    signIn(state);
+    regUser(state);
   };
 
   return (
@@ -68,6 +67,7 @@ const SignUp = () => {
           <Card.Body>
             <form onSubmit={onFinish}>
               <Input
+                type="email"
                 required
                 css={{width: '100%'}}
                 label="Email"
@@ -135,7 +135,7 @@ const SignUp = () => {
               light
               color="primary"
               auto
-              onClick={() => navigate('/login')}
+              onPress={() => navigate('/login')}
             >
               Sign In
             </Button>            

@@ -22,7 +22,7 @@ const Login = () => {
         password: values.password
       })
       localStorage.setItem('MyTemporaryToken', send.data.bearer);
-      navigate('/');
+      navigate('/user');
     }
     catch (error) {
       console.log(error)
@@ -35,7 +35,7 @@ const Login = () => {
   }
   const onFinish = (e) => {
     e.preventDefault();
-    console.log('form values', state)
+    // console.log('form values', state)
     signIn(state);
   };
 
@@ -57,6 +57,7 @@ const Login = () => {
           <Card.Body>
             <form onSubmit={onFinish}>
               <Input
+                type="email"
                 required
                 css={{width: '100%'}}
                 label="Email"
@@ -90,9 +91,9 @@ const Login = () => {
               light
               color="primary"
               auto
-              onClick={() => navigate('/signup')}
+              onPress={() => navigate('/signup')}
             >
-              SignUp
+              Sign Up
             </Button>            
           </Row>
         </Card.Footer>
