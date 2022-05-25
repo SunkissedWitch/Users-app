@@ -4,6 +4,8 @@ import { HomeButton } from '../Buttons/HomeButton';
 import { Container, Card, Row, Input, Button, Spacer, Text, Divider } from '@nextui-org/react';
 import axios from "axios";
 
+const URL = process.env.REACT_APP_URL_API || 'http://localhost:4141/api';
+
 const Login = () => {
   const [ state, setState ] = useState(
     { 
@@ -17,12 +19,12 @@ const Login = () => {
   const signIn = async (values) => {
     console.log('values', values)
     try {
-      const send = await axios.post('http://localhost:4141/api/login', {
+      const send = await axios.post(`${URL}/login`, {
         email: values.email,
         password: values.password
       })
       localStorage.setItem('MyTemporaryToken', send.data.bearer);
-      navigate('/user');
+      navigate('/users');
     }
     catch (error) {
       console.log(error)

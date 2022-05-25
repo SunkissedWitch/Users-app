@@ -6,7 +6,8 @@ import { Home } from "./components/Home";
 import Login from "./components/Login/Login";
 import SignUp from "./components/Registration/SignUp";
 import IsAuthorized from "./helpers/IsAuthorized";
-import ProtectedRoute from "./components/Users/ProtectedRoute"
+import UsersTable from "./components/Users/UsersTable"
+import { EditUser } from "./components/Users/EditUser"
 
 function App() {
   return (
@@ -16,11 +17,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="/user"
-            element={
-            <IsAuthorized >
-              <ProtectedRoute />
-            </IsAuthorized>} />
+          <Route element={<IsAuthorized />} >
+            <Route path="/users" element={<UsersTable />} />
+            <Route path="/users/:id" element={<EditUser />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

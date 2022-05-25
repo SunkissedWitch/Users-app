@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 const IsAuthorized = ({ children }) => {
@@ -9,7 +9,7 @@ const IsAuthorized = ({ children }) => {
     const decoded_token = jwt_decode(token);
 
     if (decoded_token) {
-      return children;
+      return <Outlet />;
     }
   }
   catch (error) {
