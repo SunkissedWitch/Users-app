@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
-const IsAuthorized = ({ children }) => {
+const IsAuthorized = () => {
 
   const token = localStorage.getItem('MyTemporaryToken');
 

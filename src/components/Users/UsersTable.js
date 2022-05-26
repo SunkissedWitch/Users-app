@@ -82,9 +82,7 @@ const UsersTable = () => {
       case "edit":
         return(
           <Tooltip content="Edit user">
-            <IconButton onClick={() => {
-              console.log("Edit user", user.id);
-              navigate (`/users/${user.id}`)}}>
+            <IconButton onClick={() => navigate (`/users/${user.id}`)}>
               <EditIcon size={20} fill="#979797" />
             </IconButton>
           </Tooltip>
@@ -95,7 +93,6 @@ const UsersTable = () => {
             content="Delete user"
             color="error"
             onClick={() => deleteUserByID(user.id)}
-            // onClick={handler}
           >
             <IconButton>
               <DeleteIcon size={20} fill="#FF0080" />
