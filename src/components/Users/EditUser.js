@@ -44,7 +44,7 @@ export const EditUser = () => {
   const editUser = async (values) => {
     
     try {
-      const send = await axios.put(`${URL}/users/${id}`, {
+      await axios.put(`${URL}/users/${id}`, {
         email: values.email,
         password: values.password,
         age: values.age,
@@ -133,7 +133,7 @@ export const EditUser = () => {
                   light
                   color="default"
                   auto
-                  onPress={() => navigate(-1)}
+                  onPress={() => navigate('/users')}
                 >
                   Cancel
                 </Button>
@@ -155,7 +155,7 @@ export const EditUser = () => {
               light
               color="primary"
               auto
-              onPress={() => navigate('/')}
+              onPress={() => navigate(`/users/${id}/change_password`)}
             >
               Change password
             </Button>          

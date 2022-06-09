@@ -18,5 +18,10 @@
 }
 .custom-navbar {
   height: 80px;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(10px);
+  box-shadow: rgb(2 1 1 / 10%) 0px 5px 20px -5px;
+}
+.card-description {
+  white-space: pre-wrap;
 }

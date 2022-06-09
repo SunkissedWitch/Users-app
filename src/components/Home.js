@@ -1,15 +1,22 @@
 import { Text, Container, Row } from "@nextui-org/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 export const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Container
       fluid
       className="custom-navbar"
+      display="flex"
+      direction="column"
+      justify="center"
+      alignItems="center"
       >
-        <Row justify="space-around">
+        <Row justify="space-around" align="center">
         <div>
-          <Text>Home</Text>
+          <Text transform="uppercase" onClick={() => navigate('/')}>Home</Text>
         </div>
         <div>
           <Link to={'/login'}>Sign in</Link>
@@ -19,6 +26,9 @@ export const Home = () => {
         </div>
         <div>
           <Link to={'/users'}>Users Table</Link>
+        </div>
+        <div>
+          <Link to={'/projects'}>Projects</Link>
         </div>
         </Row>
       </Container>
