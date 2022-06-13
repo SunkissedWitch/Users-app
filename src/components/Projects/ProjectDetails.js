@@ -8,6 +8,7 @@ import {
   Divider,
   Spacer,
   Grid,
+  Row,
 } from "@nextui-org/react";
 import dayjs from "dayjs";
 
@@ -23,6 +24,7 @@ export const ProjectDetails = () => {
     upwork_engagement: "",
     upwork_hourly_budget: "",
     upwork_description: "",
+    great_budget: false
   });
 
   const fetchData = async () => {
@@ -30,6 +32,19 @@ export const ProjectDetails = () => {
       const { data } = await axios.get(`${URL}/projects/${id}`);
       console.log("data", data);
       setProject(data);
+
+      if (data.upwork_hourly_budget) {
+        const splitedBudget = data.upwork_hourly_budget.split('-');
+        const [ lowPrice, highPrice ] = splitedBudget;
+
+        if(addEmoji(lowPrice) || addEmoji(highPrice)) {
+          setProject({
+            ...data,
+            great_budget: true
+          })
+        }
+      }
+
     } catch (err) {
       console.log("Error: ", err);
     }
@@ -47,9 +62,16 @@ export const ProjectDetails = () => {
     upwork_hourly_budget,
     upwork_description,
   } = project;
-  const splitedBudget = upwork_hourly_budget.split('-')
-  console.log(splitedBudget);
 
+  const addEmoji = (str) => {
+    const trimedPrice = str.replaceAll(/[^0-9.]/g, '')
+    console.log('trimedPrice', trimedPrice)
+    const parsedNum = Number.parseFloat(trimedPrice)
+    console.log('parsedNum', parsedNum)
+    return parsedNum >= 40
+  }
+
+console.log('project', project)
   return (
     <Container
       css={{
@@ -98,7 +120,8 @@ export const ProjectDetails = () => {
                 <Spacer y={1} />
 
                 <Text size={14} css={{lineHeight: 2}}>Hourly budget: </Text>
-                <Text b>{upwork_hourly_budget}</Text>🤑🤑🤑
+                <Text b>{upwork_hourly_budget}</Text>
+                {project.great_budget && <Row css={{my: 4}}>🤑🤑🤑</Row>}
                 <Spacer y={1} />
                 <Divider />
                 <Spacer y={1} />

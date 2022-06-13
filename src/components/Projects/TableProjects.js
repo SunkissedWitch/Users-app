@@ -48,6 +48,10 @@ export const TableProjects = () => {
       label: "Created on"
     },
     {
+      key: "manager",
+      label: "Manager"
+    },
+    {
       key: "upwork_description",
       label: "Description"
     }
@@ -80,6 +84,12 @@ export const TableProjects = () => {
           size={'xs'}
           color='gradient'>Details</Button>
           )
+      case "manager":
+        const ifNameIsNull = job.first_name ? job.first_name : ""
+        const ifSurnameIsNull = job.last_name ? job.last_name : ""
+        return (
+          <Text size={14}>{`${ifNameIsNull} ${ifSurnameIsNull}`}</Text>
+        )
       default:
         return <Text size={14}>{cellValue}</Text>;
     }

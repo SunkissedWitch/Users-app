@@ -18,7 +18,9 @@ export const EditUser = () => {
       age: "",
       gender:  "",
       department_id: "",
-      birthday: ""
+      birthday: "",
+      first_name: "",
+      last_name: ""
     }
   );
 
@@ -26,7 +28,6 @@ export const EditUser = () => {
     try {
       const { data } = await axios.get(`${URL}/users/${id}`);
       setUserData(data);
-
     } catch (error) {
       console.log('EditUser', error)  
     }
@@ -42,7 +43,7 @@ export const EditUser = () => {
   }
 
   const editUser = async (values) => {
-    
+    console.log("values", values)
     try {
       await axios.put(`${URL}/users/${id}`, {
         email: values.email,
@@ -51,6 +52,8 @@ export const EditUser = () => {
         gender: values.gender,
         department_id: values.department_id,
         birthday: values.birthday,
+        first_name: values.first_name,
+        last_name: values.last_name
       })
 
       navigate('/users');
@@ -89,6 +92,20 @@ export const EditUser = () => {
                 css={{width: '100%'}}
                 label="Email"
                 name="email"
+                onChange={handleChange} />
+              <Spacer y={1} />
+              <Input
+                value={userData.first_name ? userData.first_name : ""}
+                css={{width: '100%'}}
+                label="First Name"
+                name="first_name"
+                onChange={handleChange} />
+              <Spacer y={1} />
+              <Input
+                value={userData.last_name ? userData.last_name : ""}
+                css={{width: '100%'}}
+                label="Last Name"
+                name="last_name"
                 onChange={handleChange} />
               <Spacer y={1} />
               <Row css={{ justifyContent: 'space-between'}}>
