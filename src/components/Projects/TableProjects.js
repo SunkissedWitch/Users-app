@@ -1,9 +1,13 @@
-import { Spacer, Container, Table, Text, Tooltip, Button } from "@nextui-org/react";
+import { Spacer, Container, Table, Text, Tooltip, Button, Row } from "@nextui-org/react";
 import { HomeButton } from "../Buttons/HomeButton";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs from 'dayjs';
 import { useNavigate } from "react-router-dom";
+import { EyeIcon } from "../Icons/EyeIcon";
+import { IconButton } from "../Buttons/IconButton";
+
+
 const URL = process.env.REACT_APP_URL_API || 'http://localhost:4141/api';
 
 export const TableProjects = () => {
@@ -29,31 +33,38 @@ export const TableProjects = () => {
   const columns = [
     {
       key: "upwork_job_title",
-      label: "Job Title"
+      label: "Job Title",
+      width: "20%"
     },
     {
       key: "upwork_engagement",
-      label: "Engagement"
+      label: "Engagement",
+      width: "17%"
     },
     {
       key: "upwork_hourly_budget",
-      label: "Hourly Budget"
+      label: "Hourly Budget",
+      width: "15%"
     },
     {
       key: "upwork_user_name",
-      label: "User Name"
+      label: "User Name",
+      width: "20%"
     },
     {
       key: "upwork_created_on",
-      label: "Created on"
+      label: "Created on",
+      width: "13%"
     },
     {
       key: "manager",
-      label: "Manager"
+      label: "Manager",
+      width: "10%"
     },
     {
       key: "upwork_description",
-      label: "Description"
+      label: "Details",
+      width: "5%"
     }
   ];
 
@@ -79,10 +90,11 @@ export const TableProjects = () => {
           </Tooltip>)
       case "upwork_description":
         return (
-          <Button
-          onPress={() => navigate(`/projects/${job.upwork_job_id}`, {state: 'string'})}
-          size={'xs'}
-          color='gradient'>Details</Button>
+          <Row justify="center">
+            <IconButton onClick={() => navigate(`/projects/${job.upwork_job_id}`)}>
+              <EyeIcon size={20} fill="#979797" />
+            </IconButton>  
+          </Row>
           )
       case "manager":
         const ifNameIsNull = job.first_name ? job.first_name : ""
@@ -111,7 +123,7 @@ export const TableProjects = () => {
       >
         <Table.Header columns={columns}>
           {(column) => (
-            <Table.Column key={column.key}>{column.label}</Table.Column>
+            <Table.Column key={column.key} css={{width: `${column.width}`}}>{column.label}</Table.Column>
           )}
         </Table.Header>
         <Table.Body items={rows}>
@@ -121,6 +133,13 @@ export const TableProjects = () => {
             </Table.Row>
           )}
         </Table.Body>
+        {/* <Table.Pagination
+          shadow
+          noMargin
+          align="center"
+          rowsPerPage={3}
+          onPageChange={(page) => console.log({ page })}
+        /> */}
       </Table>
     </Container>
   )

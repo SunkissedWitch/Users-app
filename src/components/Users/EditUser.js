@@ -20,13 +20,19 @@ export const EditUser = () => {
       department_id: "",
       birthday: "",
       first_name: "",
-      last_name: ""
+      last_name: "",
+      upwork_account_name: ""
     }
   );
 
   const fetchUserData = async () => {
     try {
       const { data } = await axios.get(`${URL}/users/${id}`);
+      for (const property of Object.keys(data)) {
+        if (data[property] === null) {
+          data[property] = '';
+        }
+      }
       setUserData(data);
     } catch (error) {
       console.log('EditUser', error)  
@@ -53,7 +59,8 @@ export const EditUser = () => {
         department_id: values.department_id,
         birthday: values.birthday,
         first_name: values.first_name,
-        last_name: values.last_name
+        last_name: values.last_name,
+        upwork_account_name: values.upwork_account_name
       })
 
       navigate('/users');
@@ -95,14 +102,14 @@ export const EditUser = () => {
                 onChange={handleChange} />
               <Spacer y={1} />
               <Input
-                value={userData.first_name ? userData.first_name : ""}
+                value={userData.first_name}
                 css={{width: '100%'}}
                 label="First Name"
                 name="first_name"
                 onChange={handleChange} />
               <Spacer y={1} />
               <Input
-                value={userData.last_name ? userData.last_name : ""}
+                value={userData.last_name}
                 css={{width: '100%'}}
                 label="Last Name"
                 name="last_name"
@@ -143,6 +150,13 @@ export const EditUser = () => {
                 css={{width: '100%'}}
                 label="Your birthday"
                 name="birthday"
+                onChange={handleChange} />
+              <Spacer y={1} />
+              <Input
+                value={userData.upwork_account_name}
+                css={{width: '100%'}}
+                label="Upwork Account"
+                name="upwork_account_name"
                 onChange={handleChange} />
               <Spacer y={1} />
               <Row justify="space-around">

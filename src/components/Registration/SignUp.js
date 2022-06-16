@@ -12,10 +12,13 @@ const SignUp = () => {
     { 
       email: "",
       password: "",
-      age: null,
+      age: "",
       gender:  "",
-      department_id: null,
+      department_id: "",
       birthday: "",
+      first_name: "",
+      last_name: "",
+      upwork_account_name: ""
     }
   );
 
@@ -27,7 +30,7 @@ const SignUp = () => {
   }
 
   const regUser = async (values) => {
-    
+    console.log('values', values);
     try {
       const send = await axios.post(`${URL}/signup`, {
         email: values.email,
@@ -36,6 +39,9 @@ const SignUp = () => {
         gender: values.gender,
         department_id: values.department_id,
         birthday: values.birthday,
+        first_name: values.first_name,
+        last_name: values.last_name,
+        upwork_account_name: values.upwork_account_name
       })
       localStorage.setItem('MyTemporaryToken', send.data.bearer);
       navigate('/users');
@@ -68,6 +74,20 @@ const SignUp = () => {
           <Divider />
           <Card.Body>
             <form onSubmit={onFinish}>
+              <Input
+                required
+                css={{width: '100%'}}
+                label="First Name"
+                name="first_name"
+                onChange={handleChange} />
+              <Spacer y={1} />
+              <Input
+                required
+                css={{width: '100%'}}
+                label="Last Name"
+                name="last_name"
+                onChange={handleChange} />
+              <Spacer y={1} />
               <Input
                 type="email"
                 required
@@ -115,6 +135,12 @@ const SignUp = () => {
                 css={{width: '100%'}}
                 label="Your birthday"
                 name="birthday"
+                onChange={handleChange} />
+              <Spacer y={1} />
+              <Input
+                css={{width: '100%'}}
+                label="Upwork Account"
+                name="upwork_account_name"
                 onChange={handleChange} />
               <Spacer y={1} />
               <Row justify="space-around">
